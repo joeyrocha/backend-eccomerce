@@ -18,14 +18,6 @@ const Order = sequelize.define('order', {
             key: 'user_id'
         }
     },
-    product_ordered: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        references: {
-            model: Product,
-            key: 'product_id'
-        }
-    },
     total_paid: {
         type: DataTypes.INTEGER,
         allowNull: false
@@ -37,12 +29,10 @@ const Order = sequelize.define('order', {
     timestamps: false
 });
 
+
 // Associations
 User.hasMany(Order, { foreignKey: 'user' });
 Order.belongsTo(User, { foreignKey: 'user' });
-
-Product.hasMany(Order, { foreignKey: 'product_ordered' });
-Order.belongsTo(Product, { foreignKey: 'product_ordered' });
 
 module.exports = {
     Order
